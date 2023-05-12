@@ -2,6 +2,8 @@ from account import AccountSberbank
 from debit import DebitSberbank
 from general import *
 import interface_tk as interface
+from tkinter.filedialog import askopenfilename
+
 
 def df_setting():
     pd.set_option('display.max_rows', None)
@@ -23,27 +25,51 @@ def df_setting():
 
 
 if __name__ == '__main__':
+
+    # Вывод диагамм по выбранным картам
     df_setting()
 
-    interface.show()
+    interface.show_test()
 
-    '''path = 'C:\\Users\\stars\\Downloads\\Документ-2023-05-08-191903.pdf'
 
-    account = AccountSberbank()
+
+    '''
+    # Отобразить данные о счете в консоли
+    path = askopenfilename(initialdir='C:\\Users\\stars\\Downloads', filetypes=[('PDF', '*.pdf')]) 
+
+    account = AccountSberbank() 
     account.set(path)
+    print(f'Имя: {account.name},\n'
+          f'Валюта: {account.currency},\n'
+          f'Баланс: {account.balance},\n'
+          f'Неснижаемый баланс: {account.irreducible_balance},\n'
+          f'Ставка: {account.deposit_rate},\n'
+          f'Срок: {account.deposit_term}'
+          )
+    print(account.operations)'''
 
-    path = 'C:\\Users\\stars\\Downloads\\Документ-2023-03-19-000142.pdf'
+
+
+    '''
+    # Отобразить данные о дебетовой карте в консоли
+    path = askopenfilename(initialdir='C:\\Users\\stars\\Downloads', filetypes=[('PDF', '*.pdf')])
 
     debit = DebitSberbank()
-    debit.set(path)'''
+    debit.set(path)
 
-    '''expenses = debit.get_category(type_operation="expenses")  #Получение диаграмм по доходам и расходам
-    paint(expenses, 'Расходы')
+    print(f'Имя: {debit.name},\n'
+          f'Валюта: {debit.currency},\n'
+          f'Баланс: {debit.balance}'
+          )
+    print(debit.operations)
+    
+    # Получение всех категорий карте
+    print(debit.get_category())
 
-    income = debit.get_category(type_operation="income")
-    paint(income, 'Доходы')'''
+    # Получение доходных категорий карте
+    print(debit.get_category(type_operation="income"))
 
-    #print(account.get_category())
-    #print(account.get_category(type_operation="income"))
-    #print(account.get_category(type_operation="expenses"))
-    #print(account.operations.category.unique())
+    # Получение расходных категорий карте
+    print(debit.get_category(type_operation="expenses"))
+    
+    print(debit.operations.category.unique())'''

@@ -5,7 +5,7 @@ from general import *
 from debit import DebitSberbank
 from account import  AccountSberbank
 
-def show():
+def show_test():
     global entities, root
     entities = list()
 
